@@ -18,7 +18,6 @@ public class raycast : MonoBehaviour
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
 
         if (Physics.Raycast(ray, out hit, distance, mask)){
-
             // light switch
             light_switch LightSwitchScript = gameObject.GetComponent<light_switch>();
             if(hit.collider.gameObject.GetComponent<light_switch>()!=null){
@@ -50,7 +49,7 @@ public class raycast : MonoBehaviour
                     motorola_text_ui.SetActive(true);
                 }
                 // in distance
-                ui.text = "F - Pick";
+                ui.text = "F To Pick";
                 button_ui.SetActive(true);
             }
 
@@ -93,7 +92,7 @@ public class raycast : MonoBehaviour
                     hit.collider.gameObject.GetComponent<pick2>().itemPick = true;
                 }
                 // in distance
-                ui.text = "F - Pick";
+                ui.text = "F To Pick";
                 button_ui.SetActive(true);
             }
 
