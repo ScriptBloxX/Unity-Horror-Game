@@ -49,7 +49,7 @@ public class raycast : MonoBehaviour
                     motorola_text_ui.SetActive(true);
                 }
                 // in distance
-                ui.text = "F To Pick";
+                ui.text = "F To Pick Walkie Talkie";
                 button_ui.SetActive(true);
             }
 
@@ -92,7 +92,7 @@ public class raycast : MonoBehaviour
                     hit.collider.gameObject.GetComponent<pick2>().itemPick = true;
                 }
                 // in distance
-                ui.text = "F To Pick";
+                ui.text = "F To Pick Flash Light";
                 button_ui.SetActive(true);
             }
 
@@ -101,6 +101,18 @@ public class raycast : MonoBehaviour
             if(hit.collider.gameObject.GetComponent<ElevatorControl_Check>()!=null){
                 ElevatorControl.SetActive(true);
             } 
+
+            // smart pick item
+            PickAmount items = gameObject.GetComponent<PickAmount>();
+            if(hit.collider.gameObject.GetComponent<PickAmount>()!=null){
+                // pick item
+                if(Input.GetKeyDown(KeyCode.F)){
+                    hit.collider.gameObject.GetComponent<PickAmount>().itemPick = true;
+                }
+                // in distance
+                ui.text = "F To Pick "+ hit.collider.gameObject.name;
+                button_ui.SetActive(true);
+            }
 
         }else{ // out distance
             if(button_ui.activeSelf || dairyUI.activeSelf || ElevatorControl.activeSelf){
