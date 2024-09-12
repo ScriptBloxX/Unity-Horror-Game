@@ -14,7 +14,7 @@ public class light_trigger : MonoBehaviour
     {
         if(ever_trigger==false){
             ever_trigger = true;
-
+            GameObject.FindGameObjectWithTag("global").GetComponent<global_boolean>().PlayerConsciousness -= 5;
             lightSound.SetActive(true);
             StartCoroutine(ActiveCoroutine(lightSound,1.1,false));
             light_1.SetActive(false);
