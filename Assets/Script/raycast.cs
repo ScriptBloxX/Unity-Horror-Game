@@ -63,6 +63,9 @@ public class raycast : MonoBehaviour
                                 StartCoroutine(PlayClipAndWait(target.source,target.clip,target));
                         }
                     }
+                    if(target.Amount==target.AmountNeed){
+                         ui.text = $"Hope it works...";
+                    }
                 }else{
                     ui.text = $"Finally, the {target.name} is working!";
                 }
