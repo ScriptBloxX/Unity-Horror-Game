@@ -6,10 +6,14 @@ public class light_switch : MonoBehaviour
     public GameObject targetObj;
 
     private void Update() {
-        if(Disabled){
+        if(GameObject.FindGameObjectWithTag("global").GetComponent<global_boolean>().lightOff){
             targetObj.SetActive(false);
         }else{
-            targetObj.SetActive(true);
+            if(Disabled){
+                targetObj.SetActive(false);
+            }else{
+                targetObj.SetActive(true);
+            }
         }
     }
 }

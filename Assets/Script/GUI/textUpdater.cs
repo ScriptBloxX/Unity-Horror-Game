@@ -7,6 +7,6 @@ public class textUpdater : MonoBehaviour
     public GameObject target;
     public TMP_Text amount;
     void Update(){
-       amount.SetText(target.GetComponent<fuse>().amount.ToString());
+       amount.SetText(target.GetComponent<fuse>().Amount.ToString());
     }
 }

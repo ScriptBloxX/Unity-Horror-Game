@@ -21,7 +21,7 @@ public class PickAmount : MonoBehaviour
     IEnumerator ActiveCoroutine()
     {
         yield return new WaitForSeconds((float).48);
-        targetItem.GetComponent<fuse>().amount ++; // need something like target.GetComponent<transform.gameObject.name>().amount ++ any one can help me?
+        targetItem.GetComponent<fuse>().Amount ++; // need something like target.GetComponent<transform.gameObject.name>().amount ++ any one can help me?
         canvas_ui.gameObject.SetActive(true);
         transform.gameObject.SetActive(false);
     }
