@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using System.Collections;
 
 public class raycast : MonoBehaviour
 {
@@ -18,7 +20,6 @@ public class raycast : MonoBehaviour
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
 
         if (Physics.Raycast(ray, out hit, distance, mask)){
-
             // light switch
             light_switch LightSwitchScript = gameObject.GetComponent<light_switch>();
             if(hit.collider.gameObject.GetComponent<light_switch>()!=null){
@@ -40,6 +41,38 @@ public class raycast : MonoBehaviour
                     button_ui.SetActive(true);
                 }
 
+            // start item use
+            // InteractBox Box = gameObject.GetComponent<InteractBox>();
+            if(hit.collider.gameObject.GetComponent<InteractBox>()!=null){
+
+                InteractBox target = hit.collider.gameObject.GetComponent<InteractBox>();
+                if(!target.Enable){
+                    fuse getTransform = cam.gameObject.GetComponent<fuse>();
+                    if(target.Amount<target.AmountNeed){
+                        ui.text = $"[ R ] - Need {target.AmountNeed-target.Amount} {target.ItemName} to use {target.name}";
+
+                        if(Input.GetKeyDown(KeyCode.R)&&getTransform.Amount>0){
+                            getTransform.Amount--;
+                            target.Amount++;
+                        }
+                    }else if(target.Amount>=target.AmountNeed&&!target.Waiting){
+                        ui.text = $"[ R ] - The {target.name} is ready to use.";
+                            if(Input.GetKeyDown(KeyCode.R)){
+                                target.Waiting = true;
+                                ui.text = $"Hope it works...";
+                                StartCoroutine(PlayClipAndWait(target.source,target.clip,target));
+                        }
+                    }
+                    if(target.Amount==target.AmountNeed&&target.Waiting){
+                         ui.text = $"Hope it works...";
+                    }
+                }else{
+                    ui.text = $"Finally, the {target.name} is working!";
+                }
+                button_ui.SetActive(true);
+            }
+  
+            // end item use
             // pick item
             pick motorola = gameObject.GetComponent<pick>();
             if(hit.collider.gameObject.GetComponent<pick>()!=null){
@@ -50,7 +83,7 @@ public class raycast : MonoBehaviour
                     motorola_text_ui.SetActive(true);
                 }
                 // in distance
-                ui.text = "F - Pick";
+                ui.text = "F To Pick Walkie Talkie";
                 button_ui.SetActive(true);
             }
 
@@ -93,7 +126,7 @@ public class raycast : MonoBehaviour
                     hit.collider.gameObject.GetComponent<pick2>().itemPick = true;
                 }
                 // in distance
-                ui.text = "F - Pick";
+                ui.text = "F To Pick Flash Light";
                 button_ui.SetActive(true);
             }
 
@@ -102,6 +135,18 @@ public class raycast : MonoBehaviour
             if(hit.collider.gameObject.GetComponent<ElevatorControl_Check>()!=null){
                 ElevatorControl.SetActive(true);
             } 
+
+            // smart pick item
+            PickAmount items = gameObject.GetComponent<PickAmount>();
+            if(hit.collider.gameObject.GetComponent<PickAmount>()!=null){
+                // pick item
+                if(Input.GetKeyDown(KeyCode.F)){
+                    hit.collider.gameObject.GetComponent<PickAmount>().itemPick = true;
+                }
+                // in distance
+                ui.text = "F To Pick "+ hit.collider.gameObject.name;
+                button_ui.SetActive(true);
+            }
 
         }else{ // out distance
             if(button_ui.activeSelf || dairyUI.activeSelf || ElevatorControl.activeSelf){
@@ -123,6 +168,12 @@ public class raycast : MonoBehaviour
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(cam.transform.position,cam.transform.forward*distance);   
+    }
+
+    private IEnumerator PlayClipAndWait(AudioSource audioSource, AudioClip audioClip, InteractBox target){
+        audioSource.PlayOneShot(audioClip);
+        yield return new WaitForSeconds(audioClip.length);
+        target.Enable = true;
     }
 
 }
