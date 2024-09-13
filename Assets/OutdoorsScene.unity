@@ -9855,6 +9855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightOff: 0
+  PlayerConsciousness: 100
   target_1: {fileID: 1844471026}
 --- !u!1001 &429057030
 PrefabInstance:
@@ -25435,7 +25436,7 @@ GameObject:
   - component: {fileID: 1098163706}
   - component: {fileID: 1098163709}
   - component: {fileID: 1098163708}
-  - component: {fileID: 1098163707}
+  - component: {fileID: 1098163710}
   m_Layer: 5
   m_Name: brain text
   m_TagString: Untagged
@@ -25463,20 +25464,6 @@ RectTransform:
   m_AnchoredPosition: {x: -533.1, y: -401}
   m_SizeDelta: {x: 611.5, y: 67.1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1098163707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1098163705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c711a2d5c2f464d4abdbf22710fe30b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1002940393}
-  amount: {fileID: 1098163708}
 --- !u!114 &1098163708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25577,6 +25564,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098163705}
   m_CullTransparentMesh: 1
+--- !u!114 &1098163710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098163705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e3eeafc87f4734a96047e6203248fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 423720295}
+  amount: {fileID: 1098163708}
 --- !u!1 &1112832027
 GameObject:
   m_ObjectHideFlags: 0

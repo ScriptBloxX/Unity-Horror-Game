@@ -38,7 +38,7 @@ public class flashlight_system : MonoBehaviour
             yield return new WaitForSeconds(.1f);
             enable = false;
             target.SetActive(false);
-            GameObject.FindGameObjectWithTag("global").GetComponent<global_boolean>().PlayerConsciousness -= 3;
+            GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().PlayerConsciousness -= 3;
         }
     }
 }

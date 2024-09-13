@@ -14,7 +14,7 @@ public class rotation_trigger : MonoBehaviour
             trigger = true;
             target.transform.rotation = Quaternion.Euler(rotation);
             source.PlayOneShot(clip);
-            GameObject.FindGameObjectWithTag("global").GetComponent<global_boolean>().PlayerConsciousness -= 5;
+            GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().PlayerConsciousness -= 5;
         }
     }
 }

@@ -10,7 +10,7 @@ public class jumpscare1 : MonoBehaviour
         if(trigger==false){
             trigger = true;
             target.SetActive(value);
-            GameObject.FindGameObjectWithTag("global").GetComponent<global_boolean>().PlayerConsciousness -= 20;
+            GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().PlayerConsciousness -= 20;
         }
     }
 }

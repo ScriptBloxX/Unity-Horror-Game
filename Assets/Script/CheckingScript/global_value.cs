@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class global_boolean : MonoBehaviour
+public class global_value : MonoBehaviour
 {
     public bool lightOff;
     public int PlayerConsciousness;
@@ -12,7 +12,7 @@ public class global_boolean : MonoBehaviour
             lightOff = false;
             if(!fuse1Trigger){
                 fuse1Trigger = true;
-                GameObject.FindGameObjectWithTag("global").GetComponent<global_boolean>().PlayerConsciousness -= 50;
+                GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().PlayerConsciousness -= 50;
             }
         }
     }

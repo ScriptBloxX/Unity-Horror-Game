@@ -13,7 +13,7 @@ public class lightswitch_trigger : MonoBehaviour
             trigger = true;
             target.GetComponent<light_switch>().Disabled = true;
             targetSource.PlayOneShot(clip);
-            GameObject.FindGameObjectWithTag("global").GetComponent<global_boolean>().PlayerConsciousness -= 5;
+            GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().PlayerConsciousness -= 5;
         }
     }
 }

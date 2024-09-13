@@ -11,7 +11,7 @@ public class BooleanTrigger : MonoBehaviour{
         {
             if(ever_trigger==false){
                 ever_trigger = true;    
-                GameObject.FindGameObjectWithTag("global").GetComponent<global_boolean>().lightOff = true;
+                GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().lightOff = true;
             }
         }
 }

@@ -9,6 +9,7 @@ public class door_trigger_animation : MonoBehaviour
     if(trigger==false){
         trigger = true;
         target_door.GetComponent<door>().Open = value;
+        GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().PlayerConsciousness -= 7;
     }
    }
 }

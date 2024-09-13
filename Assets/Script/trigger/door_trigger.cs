@@ -14,7 +14,7 @@ public class door_trigger : MonoBehaviour
         target_door_1.SetActive(false);
         target_door_2.SetActive(true);
         source.PlayOneShot(clip);
-        GameObject.FindGameObjectWithTag("global").GetComponent<global_boolean>().PlayerConsciousness -= 7;
+        GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().PlayerConsciousness -= 7;
     }
    }
 }
