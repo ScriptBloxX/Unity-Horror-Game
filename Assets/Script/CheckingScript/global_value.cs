@@ -29,11 +29,11 @@ public class global_value : MonoBehaviour
         if(PlayerConsciousness>49&&source.clip!=clip1){
             source.clip = clip1;
             source.Stop();
-            source.PlayOneShot(clip1);
+            source.Play();
         }else if(PlayerConsciousness<=49&&source.clip!=clip2){
             source.clip = clip2;
             source.Stop();
-            source.PlayOneShot(clip2);
+            source.Play();
         }
     }
     IEnumerator RegenConsciousness(){
