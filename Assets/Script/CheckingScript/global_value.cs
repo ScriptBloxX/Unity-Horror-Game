@@ -30,7 +30,6 @@ public class global_value : MonoBehaviour
             }else if(PlayerConsciousness>0 && PlayerConsciousness<30){
                 PlayerConsciousness--;
             }else if(PlayerConsciousness<=0){
-                PlayerConsciousness = 100;
                 SceneManager.LoadScene("OutdoorsScene");
             }
         }
