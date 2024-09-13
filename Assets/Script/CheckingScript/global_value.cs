@@ -1,13 +1,16 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.SceneManagement;
 
 public class global_value : MonoBehaviour
 {
     public bool lightOff;
+    private bool fuse1Trigger;
     public int PlayerConsciousness;
     public InteractBox target_1;
-    private bool fuse1Trigger;
+    public Volume SkyLight;
     void Start()
     {
         StartCoroutine(RegenConsciousness());    
@@ -25,6 +28,12 @@ public class global_value : MonoBehaviour
     IEnumerator RegenConsciousness(){
         while (true){
             yield return new WaitForSeconds(2f);
+            if (SkyLight.TryGetComponent<Volume>(out var globalVolume)){
+                if(globalVolume.profile.TryGet<MotionBlur>(out var motionBlurComponents)){
+                    motionBlurComponents.intensity = new MinFloatParameter(CalV(PlayerConsciousness,1.85f,200f),CalV(PlayerConsciousness,1.85f,200f),true);
+                    motionBlurComponents.maximumVelocity = new ClampedFloatParameter(CalV(PlayerConsciousness,9f,1000f),2f,CalV(PlayerConsciousness,9f,1000f),true);
+                }
+            }
             if(PlayerConsciousness >49 && PlayerConsciousness<100){
                 PlayerConsciousness++;
             }else if(PlayerConsciousness>0 && PlayerConsciousness<30){
@@ -33,5 +42,12 @@ public class global_value : MonoBehaviour
                 SceneManager.LoadScene("OutdoorsScene");
             }
         }
+    }
+    public float CalV(float playerConsciousness,float default_, float max)
+    {
+        playerConsciousness = Mathf.Clamp(playerConsciousness, 0, 100);
+        float intensity = -default_ * playerConsciousness + max;
+        
+        return intensity;
     }
 }

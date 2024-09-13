@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.087887466, g: 0.103037, b: 0.1721034, a: 1}
+  m_IndirectSpecularColor: {r: 0.087887704, g: 0.10303271, b: 0.17210579, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9857,6 +9857,7 @@ MonoBehaviour:
   lightOff: 0
   PlayerConsciousness: 100
   target_1: {fileID: 1844471026}
+  SkyLight: {fileID: 1650432768}
 --- !u!1001 &429057030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23271,6 +23272,7 @@ GameObject:
   - component: {fileID: 1002940396}
   - component: {fileID: 1002940395}
   - component: {fileID: 1002940399}
+  - component: {fileID: 1002940400}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -23498,6 +23500,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Amount: 0
+--- !u!114 &1002940400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002940393}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624e46f44e05e2f4588fec40d1fb4128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shake: 0
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  duration: 1
 --- !u!1 &1015806157
 GameObject:
   m_ObjectHideFlags: 0
@@ -37793,7 +37815,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &1650432768
 MonoBehaviour:
