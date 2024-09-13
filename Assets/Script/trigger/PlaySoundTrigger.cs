@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class BooleanTrigger : MonoBehaviour{
+public class PlaySoundTrigger : MonoBehaviour
+{
         private bool ever_trigger;
-        public GameObject target_trigger;
         public AudioSource source;
         public AudioClip clip;
 
@@ -13,8 +13,7 @@ public class BooleanTrigger : MonoBehaviour{
         {
             if(ever_trigger==false){
                 ever_trigger = true;    
-                GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().lightOff = true;
-                GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().PlayerConsciousness -= 15;
+                GameObject.FindGameObjectWithTag("global").GetComponent<global_value>().PlayerConsciousness -= 5;
                 source.PlayOneShot(clip);
             }
         }

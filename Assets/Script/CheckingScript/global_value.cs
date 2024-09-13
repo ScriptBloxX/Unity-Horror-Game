@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class global_value : MonoBehaviour
 {
     public bool lightOff;
-    private bool fuse1Trigger;
+    private bool fuse1Trigger,ReadySwitch;
     public int PlayerConsciousness;
     public InteractBox target_1;
     public Volume SkyLight;
+    public AudioSource source;
+    public AudioClip clip1,clip2;
     void Start()
     {
         StartCoroutine(RegenConsciousness());    
@@ -23,6 +25,15 @@ public class global_value : MonoBehaviour
                 Debug.Log("On Trigger");
                 PlayerConsciousness -= 50;
             }
+        }
+        if(PlayerConsciousness>49&&source.clip!=clip1){
+            source.clip = clip1;
+            source.Stop();
+            source.PlayOneShot(clip1);
+        }else if(PlayerConsciousness<=49&&source.clip!=clip2){
+            source.clip = clip2;
+            source.Stop();
+            source.PlayOneShot(clip2);
         }
     }
     IEnumerator RegenConsciousness(){
