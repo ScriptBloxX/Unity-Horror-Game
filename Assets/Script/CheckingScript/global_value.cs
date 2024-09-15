@@ -22,8 +22,7 @@ public class global_value : MonoBehaviour
             lightOff = false;
             if(!fuse1Trigger){
                 fuse1Trigger = true;
-                Debug.Log("On Trigger");
-                PlayerConsciousness -= 50;
+                PlayerConsciousness -= 15;
             }
         }
         if(PlayerConsciousness>49&&source.clip!=clip1){
