@@ -13,6 +13,7 @@ public class raycast : MonoBehaviour
     public GameObject button_ui,motorola_ui,motorola_text_ui,dairyUI,ElevatorControl;
     public TextMeshProUGUI ui;
     [HideInInspector] public bool diaryRead;
+    private bool cooldown;
 
     void Update()
     {
@@ -21,7 +22,6 @@ public class raycast : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distance, mask)){
             // light switch
-            light_switch LightSwitchScript = gameObject.GetComponent<light_switch>();
             if(hit.collider.gameObject.GetComponent<light_switch>()!=null){
                 // turn on/off the light
                 if(Input.GetKeyDown(KeyCode.F)){
@@ -71,10 +71,36 @@ public class raycast : MonoBehaviour
                 }
                 button_ui.SetActive(true);
             }
-  
+            // inject brain
+            if(hit.collider.gameObject.GetComponent<inject>()!=null && hit.collider.gameObject.GetComponent<InteractWithElectric>().Enable){
+                global_value globalv = GameObject.FindGameObjectWithTag("global").GetComponent<global_value>();
+                float delay = 60f;
+                int heal = 25;
+                if(cooldown){
+                    ui.text = $"Looks like I'll have to wait a while";
+                }else{
+                    if(globalv.PlayerConsciousness<100){
+                        ui.text = $"[ R ] - For injecting chemicals into the body";
+                        if(Input.GetKeyDown(KeyCode.R)){
+                            cooldown = true;
+                            globalv.PlayerConsciousness+=heal;
+                            if(globalv.PlayerConsciousness>100){
+                                globalv.PlayerConsciousness = 100;
+                            }
+                            StartCoroutine(Cooldown(delay));
+                        }
+                    }else{
+                        ui.text = $"I don't think it's time to use it yet";
+                    }
+                }
+                IEnumerator Cooldown(float delay){
+                    yield return new WaitForSeconds(delay);
+                    cooldown = false;
+                }
+                button_ui.SetActive(true);
+            }
             // end item use
             // pick item
-            pick motorola = gameObject.GetComponent<pick>();
             if(hit.collider.gameObject.GetComponent<pick>()!=null){
                 // pick item
                 if(Input.GetKeyDown(KeyCode.F)){
@@ -88,7 +114,6 @@ public class raycast : MonoBehaviour
             }
 
             // diary reader
-            diaryUI diary = gameObject.GetComponent<diaryUI>();
             if(hit.collider.gameObject.GetComponent<diaryUI>()!=null){
                 if(dairyUI.transform.Find(hit.collider.gameObject.name)!=null){
                     dairyUI.SetActive(true);
@@ -100,7 +125,6 @@ public class raycast : MonoBehaviour
             }
 
             // door system
-            door doorSystem = gameObject.GetComponent<door>();
             if(hit.collider.gameObject.GetComponent<door>()!=null){
                 if(Input.GetKeyDown(KeyCode.F)){
                     if(hit.collider.gameObject.GetComponent<door>().Open){
@@ -119,7 +143,6 @@ public class raycast : MonoBehaviour
             }
 
             // pick item 2
-            pick2 item = gameObject.GetComponent<pick2>();
             if(hit.collider.gameObject.GetComponent<pick2>()!=null){
                 // pick item
                 if(Input.GetKeyDown(KeyCode.F)){
@@ -131,13 +154,11 @@ public class raycast : MonoBehaviour
             }
 
             // Elevator Control
-            ElevatorControl_Check elevator = gameObject.GetComponent<ElevatorControl_Check>();
             if(hit.collider.gameObject.GetComponent<ElevatorControl_Check>()!=null){
                 ElevatorControl.SetActive(true);
             } 
 
             // smart pick item
-            PickAmount items = gameObject.GetComponent<PickAmount>();
             if(hit.collider.gameObject.GetComponent<PickAmount>()!=null){
                 // pick item
                 if(Input.GetKeyDown(KeyCode.F)){
@@ -175,5 +196,4 @@ public class raycast : MonoBehaviour
         yield return new WaitForSeconds(audioClip.length);
         target.Enable = true;
     }
-
 }
